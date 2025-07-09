@@ -52,9 +52,6 @@ jobs:
           path: gradle.properties
           property: plugin_version
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
       - name: Build with Gradle
         env:
           COMMIT_SHA: ${{ steps.get_short_sha.outputs.short_sha }}
@@ -104,14 +101,11 @@ jobs:
           distribution: 'adopt'
           java-version: ${{ matrix.java }}
 
-      - name: Cache Gradle packages
-        uses: actions/cache@v2
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle-
+          validate-wrappers: true
+          allow-snapshot-wrappers: true
 
       - name: Get short commit sha
         id: get_short_sha
@@ -133,15 +127,12 @@ jobs:
           path: gradle.properties
           property: plugin_version
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
       - name: Build with Gradle
         env:
           COMMIT_SHA: ${{ steps.get_short_sha.outputs.short_sha }}
           BUILD_TYPE: "RELEASE"
           BUILD_NUMBER: ${{ github.run_number }}
-        run: ./gradlew build
+        run: gradle build
 
       - name: Upload assets to GitHub Action
         uses: actions/upload-artifact@v2
@@ -180,8 +171,11 @@ jobs:
           distribution: 'adopt'
           java-version: ${{ matrix.java }}
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          validate-wrappers: true
+          allow-snapshot-wrappers: true
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: gradle build
