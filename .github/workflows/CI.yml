@@ -18,22 +18,19 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout the sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up JDK ${{ matrix.java }}
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
           distribution: 'adopt'
           java-version: ${{ matrix.java }}
 
-      - name: Cache Gradle packages
-        uses: actions/cache@v2
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle-
+          validate-wrappers: true
+          allow-snapshot-wrappers: true
 
       - name: Get short commit sha
         id: get_short_sha
@@ -63,10 +60,10 @@ jobs:
           COMMIT_SHA: ${{ steps.get_short_sha.outputs.short_sha }}
           BUILD_TYPE: "BETA"
           BUILD_NUMBER: ${{ github.run_number }}
-        run: ./gradlew build
+        run: gradle build
 
       - name: Upload assets to GitHub Action
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.plugin_name.outputs.value }} ${{ steps.plugin_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}
           path: |
