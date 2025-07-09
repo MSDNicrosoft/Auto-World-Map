@@ -14,7 +14,8 @@ public class PacketCreator {
         buf.writeByte(0x00);
         buf.writeByte(serverNameByte.length);
         buf.writeBytes(serverNameByte);
-        byte[] voxelArray = buf.array();
+        byte[] voxelArray = new byte[buf.readableBytes()];
+        buf.readBytes(voxelArray);
         buf.release();
         return voxelArray;
     }
@@ -26,7 +27,8 @@ public class PacketCreator {
         buf.writeByte(0x2A);
         buf.writeByte(serverNameByte.length);
         buf.writeBytes(serverNameByte);
-        byte[] voxelArray = buf.array();
+        byte[] voxelArray = new byte[buf.readableBytes()];
+        buf.readBytes(voxelArray);
         buf.release();
         return voxelArray;
     }
@@ -38,7 +40,8 @@ public class PacketCreator {
         ByteBuf buf = Unpooled.buffer();
         buf.writeByte(0x00);
         buf.writeInt((int) crc32.getValue());
-        byte[] xaeroArray = buf.array();
+        byte[] xaeroArray = new byte[buf.readableBytes()];
+        buf.readBytes(xaeroArray);
         buf.release();
         return xaeroArray;
     }
