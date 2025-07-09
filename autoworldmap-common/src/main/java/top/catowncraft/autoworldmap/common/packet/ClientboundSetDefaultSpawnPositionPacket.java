@@ -57,7 +57,7 @@ public class ClientboundSetDefaultSpawnPositionPacket extends AbstractPacket {
             ByteBufUtil.writeBlockPosLegacy(buf, this.blockPos);
         }
         if (protocolVersion >= MINECRAFT_1_17) {
-             buf.writeFloat(this.angle);
+            buf.writeFloat(this.angle);
         }
     }
 }

@@ -19,11 +19,11 @@ public class AutoWorldMapCommand {
 
     public void execute(ICommandSender sender, List<String> args) {
         if (args.size() == 0) {
-            sender.sendFeedback(String.format("§a%s §bv%s §7by §6%s", SharedConstant.getPluginName(),
-                    SharedConstant.getPluginVersion(), SharedConstant.getPluginAuthor()));
+            sender.sendFeedback(String.format("§a%s §bv%s §7by §6%s", SharedConstant.PLUGIN_NAME,
+                    SharedConstant.PLUGIN_VERSION, SharedConstant.PLUGIN_AUTHORS));
         } else if (args.size() == 1 && args.get(0).equals("reload")) {
             SharedConstant.getConfig().reload();
-            sender.sendFeedback("§aConfiguration reload successful!");
+            sender.sendFeedback("§aConfiguration reloaded successfully!");
         } else {
             sender.sendFeedback("§cUnknown command!");
         }

@@ -16,7 +16,7 @@ public class ConfigManager {
     private boolean xaeroWorldMapEnable;
 
     public ConfigManager() {
-        this.config = new Yaml("config", "./plugins/{plugin_name}");
+        this.config = new Yaml("config", "./plugins/" + SharedConstant.PLUGIN_NAME);
         this.config.setHeader(SharedConstant.CONFIG_HEADER);
         this.load();
     }

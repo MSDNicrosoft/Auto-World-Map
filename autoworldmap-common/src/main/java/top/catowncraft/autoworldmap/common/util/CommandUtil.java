@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CommandUtil {
     public static boolean hasPermission(@NotNull ICommandSender sender, String permission) {
-        return sender.hasPermission(String.format("%s.%s", SharedConstant.getPluginPermissionRoot(), permission));
+        return sender.hasPermission(String.format("%s.%s", SharedConstant.PLUGIN_PERMISSION_ROOT, permission));
     }
 
     public static @NotNull List<String> getArgs(@NotNull String argumentString) {

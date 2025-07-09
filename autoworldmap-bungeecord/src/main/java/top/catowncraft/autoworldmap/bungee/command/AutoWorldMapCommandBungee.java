@@ -11,7 +11,7 @@ public class AutoWorldMapCommandBungee extends Command implements TabExecutor {
     private final AutoWorldMapCommand command = new AutoWorldMapCommand();
 
     public AutoWorldMapCommandBungee() {
-        super(SharedConstant.getPluginID());
+        super(SharedConstant.PLUGIN_ID);
     }
 
     @Override
