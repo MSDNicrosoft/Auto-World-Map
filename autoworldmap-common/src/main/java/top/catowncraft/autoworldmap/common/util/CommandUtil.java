@@ -15,7 +15,7 @@ public class CommandUtil {
 
     public static @NotNull List<String> getArgs(@NotNull String argumentString) {
         String[] args = argumentString.split(" ");
-        if (args.length == 1 && args[0].equals("")) {
+        if (args.length == 1 && args[0].isEmpty()) {
             return new ArrayList<>();
         }
         return Arrays.asList(args);
@@ -23,7 +23,7 @@ public class CommandUtil {
 
     public static @NotNull List<String> tweakArgs(String[] args) {
         ArrayList<String> ret = new ArrayList<>(Arrays.asList(args));
-        if (!ret.isEmpty() && ret.get(ret.size() - 1).equals("")) {
+        if (!ret.isEmpty() && ret.get(ret.size() - 1).isEmpty()) {
             ret.remove(ret.size() - 1);
         }
         return ret;
