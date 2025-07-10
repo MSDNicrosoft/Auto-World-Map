@@ -6,7 +6,7 @@ import dev.simplix.protocolize.api.mapping.ProtocolIdMapping;
 import dev.simplix.protocolize.api.packet.AbstractPacket;
 import io.netty.buffer.ByteBuf;
 import lombok.*;
-import top.catowncraft.autoworldmap.common.helper.BlockPos;
+import top.catowncraft.autoworldmap.common.data.BlockPos;
 import top.catowncraft.autoworldmap.common.util.ByteBufUtil;
 
 import java.util.Arrays;

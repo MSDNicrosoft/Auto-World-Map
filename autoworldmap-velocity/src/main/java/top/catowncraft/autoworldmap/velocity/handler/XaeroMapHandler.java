@@ -8,7 +8,7 @@ import dev.simplix.protocolize.api.listener.PacketReceiveEvent;
 import top.catowncraft.autoworldmap.AutoWorldMapVelocity;
 import top.catowncraft.autoworldmap.common.SharedConstant;
 import top.catowncraft.autoworldmap.common.event.IClientboundSetDefaultSpawnPositionEvent;
-import top.catowncraft.autoworldmap.common.helper.PacketCreator;
+import top.catowncraft.autoworldmap.common.util.packet.PacketCreator;
 import top.catowncraft.autoworldmap.common.packet.ClientboundSetDefaultSpawnPositionPacket;
 
 import java.util.Optional;

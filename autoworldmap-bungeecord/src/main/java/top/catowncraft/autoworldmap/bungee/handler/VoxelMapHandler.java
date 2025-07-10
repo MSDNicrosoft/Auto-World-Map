@@ -6,7 +6,7 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 import org.jetbrains.annotations.NotNull;
 import top.catowncraft.autoworldmap.common.SharedConstant;
-import top.catowncraft.autoworldmap.common.helper.PacketCreator;
+import top.catowncraft.autoworldmap.common.util.packet.PacketCreator;
 
 public class VoxelMapHandler implements Listener {
     @EventHandler

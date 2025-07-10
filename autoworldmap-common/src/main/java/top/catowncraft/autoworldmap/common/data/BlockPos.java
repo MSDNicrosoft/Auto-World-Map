@@ -1,4 +1,4 @@
-package top.catowncraft.autoworldmap.common.helper;
+package top.catowncraft.autoworldmap.common.data;
 
 import lombok.*;
 

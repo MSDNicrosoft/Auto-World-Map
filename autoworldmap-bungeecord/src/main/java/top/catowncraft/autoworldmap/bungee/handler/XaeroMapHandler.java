@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import top.catowncraft.autoworldmap.AutoWorldMapBungeeCord;
 import top.catowncraft.autoworldmap.common.SharedConstant;
 import top.catowncraft.autoworldmap.common.event.IClientboundSetDefaultSpawnPositionEvent;
-import top.catowncraft.autoworldmap.common.helper.PacketCreator;
+import top.catowncraft.autoworldmap.common.util.packet.PacketCreator;
 import top.catowncraft.autoworldmap.common.packet.ClientboundSetDefaultSpawnPositionPacket;
 
 public class XaeroMapHandler implements IClientboundSetDefaultSpawnPositionEvent {

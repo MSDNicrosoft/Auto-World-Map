@@ -8,7 +8,7 @@ import com.velocitypowered.api.proxy.messages.MinecraftChannelIdentifier;
 import org.jetbrains.annotations.NotNull;
 import top.catowncraft.autoworldmap.AutoWorldMapVelocity;
 import top.catowncraft.autoworldmap.common.SharedConstant;
-import top.catowncraft.autoworldmap.common.helper.PacketCreator;
+import top.catowncraft.autoworldmap.common.util.packet.PacketCreator;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

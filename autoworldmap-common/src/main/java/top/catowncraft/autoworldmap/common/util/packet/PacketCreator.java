@@ -1,4 +1,4 @@
-package top.catowncraft.autoworldmap.common.helper;
+package top.catowncraft.autoworldmap.common.util.packet;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

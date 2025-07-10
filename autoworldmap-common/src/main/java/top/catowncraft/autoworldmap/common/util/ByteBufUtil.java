@@ -1,7 +1,7 @@
 package top.catowncraft.autoworldmap.common.util;
 
 import io.netty.buffer.ByteBuf;
-import top.catowncraft.autoworldmap.common.helper.BlockPos;
+import top.catowncraft.autoworldmap.common.data.BlockPos;
 
 import java.nio.charset.StandardCharsets;
 
