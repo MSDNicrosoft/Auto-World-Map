@@ -7,7 +7,7 @@ dependencies {
     shade(project(":autoworldmap-common"))
 }
 
-tasks.named("classes") {
+classes {
     doLast {
         File file = file("build/classes/java/main/velocity-plugin.json")
         JsonSlurper slurper = new JsonSlurper()

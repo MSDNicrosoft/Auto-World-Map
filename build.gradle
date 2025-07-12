@@ -1,5 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
 plugins {
     id("java")
     id("com.github.johnrengelman.shadow").version("8.1.1")
@@ -21,16 +19,16 @@ allprojects {
         mavenCentral()
 
         maven {
-            name("JitPack")
-            url("https://jitpack.io")
+            name = "JitPack"
+            url = "https://jitpack.io"
         }
         maven {
-            name("Exceptionflug")
-            url("https://mvn.exceptionflug.de/repository/exceptionflug-public")
+            name = "Exceptionflug"
+            url = "https://mvn.exceptionflug.de/repository/exceptionflug-public"
         }
         maven {
-            name("PaperMC")
-            url("https://repo.papermc.io/repository/maven-public")
+            name = "PaperMC"
+            url = "https://repo.papermc.io/repository/maven-public"
         }
     }
 
@@ -44,7 +42,6 @@ allprojects {
         }
     }
 
-    group(project.maven_group)
     def ENV = System.getenv()
     String realVersion = "${project.plugin_version}"
 
@@ -61,48 +58,46 @@ allprojects {
             realVersion += "-dev"
     }
 
-    description(project.plugin_description)
+
 
     base {
         if (project.name != rootProject.name) {
-            archivesBaseName("${rootProject.name}${project.name.replace("${project.plugin_name}".toLowerCase(), "")}")
+            archivesName = "${rootProject.name}${project.name.replace("${project.plugin_name}".toLowerCase(), "")}"
         }
 
-        version(realVersion)
+        version = realVersion
+        group = project.maven_group
+        description = project.plugin_description
     }
 
     java {
-        sourceCompatibility(JavaVersion.VERSION_1_8)
-        targetCompatibility(JavaVersion.VERSION_1_8)
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
 
         withSourcesJar()
     }
 
-    tasks.withType(JavaCompile).configureEach {
-        options.encoding("UTF-8")
+    assemble {
+        dependsOn("shadowJar")
     }
 
-    tasks.named("assemble") { task ->
-        task.dependsOn(tasks.shadowJar)
-    }
+    shadowJar {
+        dependsOn(jar)
+        from("LICENSE")
 
-    tasks.named("shadowJar") { ShadowJar task ->
-        task.dependsOn(jar)
-        task.from("LICENSE")
+        configurations.clear()
+        configurations.add(project.configurations.shade)
+        configurations.add(project.configurations.shadeOnly)
 
-        task.configurations.clear()
-        task.configurations.add(project.configurations.shade)
-        task.configurations.add(project.configurations.shadeOnly)
-
-        task.exclude("META-INF/maven/**/*", "META-INF/*.txt")
-        task.relocate("de.leonhard.storage", "${project.maven_group.replaceAll("-", "")}.lib.de.leonhard.storage")
+        exclude("META-INF/maven/**/*", "META-INF/*.txt")
+        relocate("de.leonhard.storage", "${project.maven_group.replaceAll("-", "")}.lib.de.leonhard.storage")
 
         // Remove '-all' suffix
-        task.archiveClassifier.set(null)
+        archiveClassifier = null
     }
 }
 
-tasks.named("shadowJar") { ShadowJar task ->
+shadowJar {
     dependsOn(project.subprojects.collect {
         // Possible solution, it works.
         it.name == "autoworldmap-common" ? it.tasks.jar : it.tasks.shadowJar
@@ -129,5 +124,5 @@ tasks.named("shadowJar") { ShadowJar task ->
         }
     }
 
-    task.from("build/tmp/merged")
+    from("build/tmp/merged")
 }
