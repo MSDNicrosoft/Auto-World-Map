@@ -6,8 +6,6 @@ import dev.simplix.protocolize.api.mapping.ProtocolIdMapping;
 import dev.simplix.protocolize.api.packet.AbstractPacket;
 import io.netty.buffer.ByteBuf;
 import lombok.*;
-import top.catowncraft.autoworldmap.common.data.BlockPos;
-import top.catowncraft.autoworldmap.common.util.ByteBufUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,26 +40,16 @@ public class ClientboundSetDefaultSpawnPositionPacket extends AbstractPacket {
             AbstractProtocolMapping.rangedIdMapping(/* Minecraft 1.21.5 */ 770, /* Minecraft 1.21.7 */ 772, 0x5A)
     );
 
-    private BlockPos blockPos;
-    private float angle;
+    private ByteBuf data;
 
     @Override
     public void read(ByteBuf buf, PacketDirection packetDirection, int protocolVersion) {
-        this.blockPos = protocolVersion >= MINECRAFT_1_14 ? ByteBufUtil.readBlockPos(buf) : ByteBufUtil.readBlockPosLegacy(buf);
-        if (protocolVersion >= MINECRAFT_1_17) {
-            this.angle = buf.readFloat();
-        }
+        this.data = buf.readBytes(buf.readableBytes());
     }
 
     @Override
     public void write(ByteBuf buf, PacketDirection packetDirection, int protocolVersion) {
-        if (protocolVersion >= MINECRAFT_1_14) {
-            ByteBufUtil.writeBlockPos(buf, this.blockPos);
-        } else {
-            ByteBufUtil.writeBlockPosLegacy(buf, this.blockPos);
-        }
-        if (protocolVersion >= MINECRAFT_1_17) {
-            buf.writeFloat(this.angle);
-        }
+        buf.writeBytes(this.data);
+        data.release();
     }
 }
