@@ -1,6 +1,7 @@
 package top.catowncraft.autoworldmap.common.util.packet;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,8 +15,7 @@ public class PacketCreator {
         buf.writeByte(0x00);
         buf.writeByte(serverNameByte.length);
         buf.writeBytes(serverNameByte);
-        byte[] voxelArray = new byte[buf.readableBytes()];
-        buf.readBytes(voxelArray);
+        byte[] voxelArray = ByteBufUtil.getBytes(buf);
         buf.release();
         return voxelArray;
     }
@@ -27,8 +27,7 @@ public class PacketCreator {
         buf.writeByte(0x2A);
         buf.writeByte(serverNameByte.length);
         buf.writeBytes(serverNameByte);
-        byte[] voxelArray = new byte[buf.readableBytes()];
-        buf.readBytes(voxelArray);
+        byte[] voxelArray = ByteBufUtil.getBytes(buf);
         buf.release();
         return voxelArray;
     }
@@ -40,8 +39,7 @@ public class PacketCreator {
         ByteBuf buf = Unpooled.buffer();
         buf.writeByte(0x00);
         buf.writeInt((int) crc32.getValue());
-        byte[] xaeroArray = new byte[buf.readableBytes()];
-        buf.readBytes(xaeroArray);
+        byte[] xaeroArray = ByteBufUtil.getBytes(buf);
         buf.release();
         return xaeroArray;
     }

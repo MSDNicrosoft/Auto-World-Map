@@ -58,8 +58,6 @@ allprojects {
             realVersion += "-dev"
     }
 
-
-
     base {
         if (project.name != rootProject.name) {
             archivesName = "${rootProject.name}${project.name.replace("${project.plugin_name}".toLowerCase(), "")}"
